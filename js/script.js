@@ -29,7 +29,7 @@ function dateFormatter(date) {
 
 /** on load */
 $(document).ready(function () {
-    VK.Auth.getLoginStatus(function (r) {
+    VK.Widgets.Auth.getLoginStatus(function (r) {
         if (r.session) {
             console.log("Already auth");
             uiLogin();
@@ -46,7 +46,7 @@ function getUserInfo(logout) {
         return;
     }
     console.log("Getting user info");
-    VK.Api.call(
+    VK.api.call(
         "users.get",
         {fields : "first_name,second_name", v: vkApiVersion},
         function (r) {
@@ -79,7 +79,7 @@ function uiExportOn() {
 $("#login").click(function (event) {
     event.preventDefault();
     console.log("login");
-    VK.Auth.login(
+    VK.Widgets.Auth.login(
         function (r) {
             if (r.session) {
                 uiLogin();
@@ -92,7 +92,7 @@ $("#login").click(function (event) {
 $("#logout").click(function (event) {
     event.preventDefault();
     console.log("logout");
-    VK.Auth.logout(function () {
+    VK.Widgets.Auth.logout(function () {
         uiLogout();
     });
 });
@@ -100,7 +100,7 @@ $("#logout").click(function (event) {
 $("#start").click(function (event) {
 
     event.preventDefault();
-    VK.Api.call(
+    VK.api.call(
         "friends.get",
         {
             order: "name",
